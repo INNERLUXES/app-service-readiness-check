@@ -1,0 +1,50 @@
+{
+  "name": "app-service-readiness-check",
+  "version": "1.0.0",
+  "description": "Azure App Service readiness check for ASP.NET and ASP.NET Core source folders: reads web.config, appsettings, project files and C# and VB code as plain text, runs none of it, and lists what may block or complicate a move to App Service: secrets written in the configuration, registry, COM and native calls, target frameworks not on the list offered, writes to local paths, assemblies from the Global Assembly Cache, Windows authentication, mail pickup folders, MSMQ, the event log, state kept in memory, ports other than 80 and 443, listening sockets, background work, custom modules, ISAPI and URL Rewrite rules, with file and line and a verdict per app. Text, JSON, CSV and GitHub annotation output, exit codes for a pipeline, no dependencies.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "app-service-readiness-check": "bin/app-service-readiness-check.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "examples",
+    "research",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "check": "node tools/check.mjs",
+    "example": "node tools/example.mjs"
+  },
+  "keywords": [
+    "azure-migration",
+    "azure-app-service",
+    "aspnet",
+    "dotnet",
+    "cloud-migration",
+    "migration-assessment",
+    "web-config",
+    "rehost",
+    "readiness",
+    "cli"
+  ],
+  "author": "INNERLUXES <info@innerluxes.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INNERLUXES/app-service-readiness-check.git"
+  },
+  "homepage": "https://innerluxes.dev/application/migration/azure"
+}
