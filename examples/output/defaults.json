@@ -1,0 +1,29 @@
+{
+  "name": "built-in defaults",
+  "rules": {
+    "hardCodedSecret": "error",
+    "registryAccess": "error",
+    "comInterop": "error",
+    "unsupportedFramework": "error",
+    "localDiskWrite": "warning",
+    "gacAssembly": "warning",
+    "windowsAuthentication": "warning",
+    "smtpPickupDirectory": "warning",
+    "msmq": "warning",
+    "eventLog": "warning",
+    "inprocSessionState": "warning",
+    "nonStandardPort": "warning",
+    "rawSocket": "warning",
+    "backgroundWork": "info",
+    "customModuleHandler": "info",
+    "isapiExtension": "info",
+    "urlRewrite": "info",
+    "stateServerSession": "info",
+    "localPathSetting": "info"
+  },
+  "allowedFrameworks": [],
+  "knownAssemblies": [],
+  "exclude": [],
+  "minSeverity": "info",
+  "failOn": "error"
+}

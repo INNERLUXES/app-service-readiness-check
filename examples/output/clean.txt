@@ -1,0 +1,44 @@
+app-service-readiness-check: examples/clean
+input: folder examples/clean; 5 files of the kinds read: 1 web.config, 1 appsettings, 1 project, 2 C#; read as UTF-8 5; 0 folders skipped; 0 excluded; 0 links not followed; 1 other file passed over
+config: built-in defaults: frameworks offered net20, net30, net35, net462, net47, net471, net472, net48, net481, net8.0, net9.0 and net10.0; minimum severity info; fail on error
+rules: hard-coded-secret (error); registry-access (error); com-interop (error); unsupported-framework (error); local-disk-write (warning); gac-assembly (warning); windows-authentication (warning); smtp-pickup-directory (warning); msmq (warning); event-log (warning); inproc-session-state (warning); non-standard-port (warning); raw-socket (warning); background-work (info); custom-module-handler (info); isapi-extension (info); url-rewrite (info); state-server-session (info); local-path-setting (info); unreadable-file (error); scan-limit (error)
+apps: 1 (1 Ready, 0 Ready with changes, 0 Blockers)
+findings: 0
+
+Apps (1)
+
+  app               folder                           framework  error  warning  info  verdict
+  Harrowgate.Loans  examples/clean/Harrowgate.Loans  net8.0     0      0        0     Ready
+
+Rules (21)
+
+  rule                    level    findings
+  hard-coded-secret       error    0
+  registry-access         error    0
+  com-interop             error    0
+  unsupported-framework   error    0
+  local-disk-write        warning  0
+  gac-assembly            warning  0
+  windows-authentication  warning  0
+  smtp-pickup-directory   warning  0
+  msmq                    warning  0
+  event-log               warning  0
+  inproc-session-state    warning  0
+  non-standard-port       warning  0
+  raw-socket              warning  0
+  background-work         info     0
+  custom-module-handler   info     0
+  isapi-extension         info     0
+  url-rewrite             info     0
+  state-server-session    info     0
+  local-path-setting      info     0
+  unreadable-file         error    0
+  scan-limit              error    0
+
+Findings (0)
+
+  none
+
+This check reads the source as text and runs none of it. A finding is a lead found by a pattern, and a clean result is not a migration assessment and not a certification (docs/limits.md).
+
+RESULT: PASS - no finding at or above error

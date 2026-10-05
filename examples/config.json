@@ -1,0 +1,6 @@
+{
+  "name": "Pellworth readiness review",
+  "allowedFrameworks": ["net7.0"],
+  "exclude": ["Proxies"],
+  "rules": { "localPathSetting": "warning" }
+}

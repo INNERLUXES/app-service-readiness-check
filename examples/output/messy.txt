@@ -1,0 +1,179 @@
+app-service-readiness-check: examples/messy
+input: folder examples/messy; 12 files of the kinds read: 1 web.config, 1 appsettings, 2 project, 1 packages.config, 1 Global.asax, 5 C#, 1 VB; read as UTF-8 12; 1 folder skipped (obj); 1 excluded; 0 links not followed; 1 other file passed over
+config: examples/config.json (Pellworth readiness review): frameworks offered net20, net30, net35, net462, net47, net471, net472, net48, net481, net8.0, net9.0, net10.0 and net7.0 (1 from allowedFrameworks); exclude Proxies; minimum severity info; fail on error
+rules: hard-coded-secret (error); registry-access (error); com-interop (error); unsupported-framework (error); local-disk-write (warning); gac-assembly (warning); windows-authentication (warning); smtp-pickup-directory (warning); msmq (warning); event-log (warning); inproc-session-state (warning); non-standard-port (warning); raw-socket (warning); background-work (info); custom-module-handler (info); isapi-extension (info); url-rewrite (info); state-server-session (info); local-path-setting (warning); unreadable-file (error); scan-limit (error)
+apps: 2 (0 Ready, 1 Ready with changes, 1 Blockers)
+findings: 34 (7 error, 20 warning, 7 info)
+
+Apps (2)
+
+  app                  folder                              framework     error  warning  info  verdict
+  Pellworth.Rates.Api  examples/messy/Pellworth.Rates.Api  net7.0        0      3        2     Ready with changes
+  Pellworth.Tracking   examples/messy/Pellworth.Tracking   v4.0 (net40)  7      17       5     Blockers
+
+Rules (21)
+
+  rule                    level    findings
+  hard-coded-secret       error    2
+  registry-access         error    1
+  com-interop             error    3
+  unsupported-framework   error    1
+  local-disk-write        warning  3
+  gac-assembly            warning  1
+  windows-authentication  warning  2
+  smtp-pickup-directory   warning  1
+  msmq                    warning  4
+  event-log               warning  3
+  inproc-session-state    warning  2
+  non-standard-port       warning  2
+  raw-socket              warning  0
+  background-work         info     3
+  custom-module-handler   info     2
+  isapi-extension         info     1
+  url-rewrite             info     1
+  state-server-session    info     0
+  local-path-setting      warning  2
+  unreadable-file         error    0
+  scan-limit              error    0
+
+Findings (34)
+
+  ERROR    unsupported-framework   examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:8
+           the app targets v4.0 (net40), .NET Framework, which is not on the list of frameworks the tool takes as offered by App Service (net20, net30, net35, net462 and 9 more)
+           fix: retarget the app to a framework App Service offers, run it in a custom container, or, once you have checked that App Service runs it, add it to allowedFrameworks
+
+  ERROR    com-interop             examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:19
+           the project references the COM component "PellworthLabelPrint"
+           fix: replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container
+
+  ERROR    com-interop             examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs:9
+           the code calls COM or native code through "DllImport"
+           fix: replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container
+
+  ERROR    registry-access         examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs:14
+           the code uses the Windows registry through "Registry.LocalMachine"
+           fix: move the values into app settings or Azure App Configuration; if the app must keep the registry, consider Managed Instance on App Service or a Windows container
+
+  ERROR    com-interop             examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:9
+           the code calls COM or native code through "CreateObject("
+           fix: replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container
+
+  ERROR    hard-coded-secret       examples/messy/Pellworth.Tracking/Web.config:4
+           the connection string "TrackingDb" holds Password= with a secret written in the file; the value is masked
+           fix: move the value into an App Service app setting or connection string, best as a Key Vault reference read with a managed identity, and change the secret, since it was in the repository
+
+  ERROR    hard-coded-secret       examples/messy/Pellworth.Tracking/Web.config:9
+           the setting "ProofOfDeliveryStorage" holds AccountKey= with a secret written in the file; the value is masked
+           fix: move the value into an App Service app setting or connection string, best as a Key Vault reference read with a managed identity, and change the secret, since it was in the repository
+
+  WARNING  non-standard-port       examples/messy/Pellworth.Rates.Api/Program.cs:5
+           the code binds the port 5080
+           fix: let App Service give the port: on Windows the app runs behind IIS, and in a Linux container read the PORT setting; serve other traffic through HTTP on the usual ports
+
+  WARNING  inproc-session-state    examples/messy/Pellworth.Rates.Api/Program.cs:6
+           the code keeps its cache and state in the memory of one instance through "AddDistributedMemoryCache("
+           fix: keep the state in Azure Cache for Redis or SQL, with the ASP.NET Redis state provider or a Redis distributed cache, before scaling out
+
+  WARNING  non-standard-port       examples/messy/Pellworth.Rates.Api/appsettings.json:6
+           the setting "Urls" binds the ports 5080 and 5443
+           fix: let App Service give the port: on Windows the app runs behind IIS, and in a Linux container read the PORT setting; serve other traffic through HTTP on the usual ports
+
+  WARNING  event-log               examples/messy/Pellworth.Tracking/Global.asax.cs:12
+           the code uses the Windows event log through "EventLog.SourceExists"
+           fix: log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights
+
+  WARNING  event-log               examples/messy/Pellworth.Tracking/Global.asax.cs:14
+           the code uses the Windows event log through "EventLog.CreateEventSource"
+           fix: log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights
+
+  WARNING  event-log               examples/messy/Pellworth.Tracking/Global.asax.cs:21
+           the code uses the Windows event log through "EventLog.WriteEntry"
+           fix: log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights
+
+  WARNING  msmq                    examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:13
+           the project references System.Messaging, the MSMQ library
+           fix: move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service
+
+  WARNING  msmq                    examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:1
+           the code uses MSMQ through "System.Messaging"
+           fix: move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service
+
+  WARNING  msmq                    examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:6
+           the code uses MSMQ through "FormatName:"
+           fix: move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service
+
+  WARNING  msmq                    examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:12
+           the code uses MSMQ through "New MessageQueue"
+           fix: move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service
+
+  WARNING  local-disk-write        examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:14
+           the code writes a file through "File.WriteAllText(" to the local path "C:\Pellworth\Exports\" (named 2 lines above)
+           fix: keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files
+
+  WARNING  local-disk-write        examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:17
+           the code writes a file through "File.Copy(" to the local path "\\fs01\manifests\archive\"
+           fix: keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files
+
+  WARNING  local-disk-write        examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:22
+           the code writes a file through ".SaveAs(" to a path in the folder of the app ("Server.MapPath")
+           fix: keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files
+
+  WARNING  local-path-setting      examples/messy/Pellworth.Tracking/Web.config:8
+           web.config sets the setting "ManifestExportFolder" to "D:\Pellworth\Manifests", a local path
+           fix: set the path in an App Service app setting, built from the HOME or temporary folder, or move the files to Azure Storage
+
+  WARNING  gac-assembly            examples/messy/Pellworth.Tracking/Web.config:17
+           web.config compiles against the assembly "Pellworth.Legacy.Barcode", which no package or reference with a HintPath of the app provides, so it may come from the Global Assembly Cache
+           fix: add the assembly as a NuGet package or a file deployed with the app, or, if it can only come from the Global Assembly Cache, consider a Windows container or Managed Instance on App Service
+
+  WARNING  windows-authentication  examples/messy/Pellworth.Tracking/Web.config:21
+           web.config sets <authentication mode="Windows">, which signs users in with their Windows account
+           fix: sign users in with Microsoft Entra ID, through App Service authentication or the Microsoft identity libraries, and stop relying on the Windows account of the request
+
+  WARNING  windows-authentication  examples/messy/Pellworth.Tracking/Web.config:22
+           web.config sets <identity impersonate="true">, which runs requests as the Windows user
+           fix: sign users in with Microsoft Entra ID, through App Service authentication or the Microsoft identity libraries, and stop relying on the Windows account of the request
+
+  WARNING  inproc-session-state    examples/messy/Pellworth.Tracking/Web.config:23
+           web.config sets <sessionState mode="InProc">, which keeps state in the memory of one instance
+           fix: keep the state in Azure Cache for Redis or SQL, with the ASP.NET Redis state provider or a Redis distributed cache, before scaling out
+
+  WARNING  smtp-pickup-directory   examples/messy/Pellworth.Tracking/Web.config:30
+           web.config sends mail with deliveryMethod="SpecifiedPickupDirectory", which drops each message into a folder
+           fix: send mail through an SMTP relay or a mail service such as Azure Communication Services, with its credentials in app settings
+
+  WARNING  local-path-setting      examples/messy/Pellworth.Tracking/Web.config:31
+           web.config sets pickupDirectoryLocation of <specifiedPickupDirectory> to "C:\inetpub\mailroot\Pickup", a local path
+           fix: set the path in an App Service app setting, built from the HOME or temporary folder, or move the files to Azure Storage
+
+  INFO     background-work         examples/messy/Pellworth.Rates.Api/Program.cs:8
+           the code runs work in the background through "AddHostedService"
+           fix: run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app
+
+  INFO     background-work         examples/messy/Pellworth.Rates.Api/RateRefresher.cs:3
+           the code runs work in the background through ": BackgroundService"
+           fix: run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app
+
+  INFO     background-work         examples/messy/Pellworth.Tracking/Global.asax.cs:16
+           the code runs work in the background through "QueueBackgroundWorkItem("
+           fix: run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app
+
+  INFO     custom-module-handler   examples/messy/Pellworth.Tracking/Web.config:25
+           web.config adds the HTTP module "YardAudit" of type "Pellworth.Tracking.Modules.YardAuditModule"
+           fix: check that each module and handler runs under App Service, with no registry, COM or local disk use of its own, and test it there
+
+  INFO     custom-module-handler   examples/messy/Pellworth.Tracking/Web.config:37
+           web.config adds the HTTP module "YardAudit" of type "Pellworth.Tracking.Modules.YardAuditModule"
+           fix: check that each module and handler runs under App Service, with no registry, COM or local disk use of its own, and test it there
+
+  INFO     isapi-extension         examples/messy/Pellworth.Tracking/Web.config:40
+           web.config maps the handler "ManifestImage" to an ISAPI extension
+           fix: check that the ISAPI component can be deployed with the app and runs in the App Service sandbox, or replace it with a managed module
+
+  INFO     url-rewrite             examples/messy/Pellworth.Tracking/Web.config:45
+           web.config has the URL Rewrite rule "Old tracking links"
+           fix: check each rule on App Service, above all rules that use server variables, rewrite to another host through ARR, or depend on the old host name
+
+This check reads the source as text and runs none of it. A finding is a lead found by a pattern, and a clean result is not a migration assessment and not a certification (docs/limits.md).
+
+RESULT: FAIL - 7 findings at or above error (7 error, 20 warning, 7 info)

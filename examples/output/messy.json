@@ -1,0 +1,1094 @@
+{
+  "tool": "app-service-readiness-check",
+  "version": "1.0.0",
+  "input": {
+    "folder": "examples/messy",
+    "files": 12,
+    "byKind": {
+      "web-config": 1,
+      "appsettings": 1,
+      "project": 2,
+      "packages": 1,
+      "asax": 1,
+      "cs": 5,
+      "vb": 1
+    },
+    "encodings": {
+      "utf-8": 12,
+      "utf-16le": 0,
+      "utf-16be": 0,
+      "latin-1": 0
+    },
+    "notRead": 0,
+    "skippedFolders": {
+      "count": 1,
+      "names": [
+        "obj"
+      ]
+    },
+    "excluded": 1,
+    "links": 0,
+    "otherFiles": 1
+  },
+  "config": {
+    "file": "examples/config.json",
+    "name": "Pellworth readiness review",
+    "frameworks": [
+      "net20",
+      "net30",
+      "net35",
+      "net462",
+      "net47",
+      "net471",
+      "net472",
+      "net48",
+      "net481",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net7.0"
+    ],
+    "allowedFrameworks": [
+      "net7.0"
+    ],
+    "knownAssemblies": [],
+    "exclude": [
+      "Proxies"
+    ],
+    "minSeverity": "info",
+    "failOn": "error",
+    "rules": [
+      {
+        "id": "hard-coded-secret",
+        "key": "hardCodedSecret",
+        "level": "error",
+        "rule": "a password, account key or shared access key written as a value in web.config or appsettings.json"
+      },
+      {
+        "id": "registry-access",
+        "key": "registryAccess",
+        "level": "error",
+        "rule": "a line of code that uses Microsoft.Win32.Registry, a RegistryKey call or My.Computer.Registry"
+      },
+      {
+        "id": "com-interop",
+        "key": "comInterop",
+        "level": "error",
+        "rule": "a line of code or a project reference that reaches COM or a native library"
+      },
+      {
+        "id": "unsupported-framework",
+        "key": "unsupportedFramework",
+        "level": "error",
+        "rule": "a target framework that is not one of 13 frameworks on the list (net20, net30, net35, net462 and 9 more)"
+      },
+      {
+        "id": "local-disk-write",
+        "key": "localDiskWrite",
+        "level": "warning",
+        "rule": "a write, move or delete of a file at a drive, share or app folder path"
+      },
+      {
+        "id": "gac-assembly",
+        "key": "gacAssembly",
+        "level": "warning",
+        "rule": "an assembly in web.config that comes from no package or local reference of the app"
+      },
+      {
+        "id": "windows-authentication",
+        "key": "windowsAuthentication",
+        "level": "warning",
+        "rule": "Windows authentication or impersonation in web.config or the code"
+      },
+      {
+        "id": "smtp-pickup-directory",
+        "key": "smtpPickupDirectory",
+        "level": "warning",
+        "rule": "mail sent to a pickup folder instead of an SMTP server"
+      },
+      {
+        "id": "msmq",
+        "key": "msmq",
+        "level": "warning",
+        "rule": "a use of MSMQ in the code, web.config or a project file"
+      },
+      {
+        "id": "event-log",
+        "key": "eventLog",
+        "level": "warning",
+        "rule": "a line of code that uses the Windows event log"
+      },
+      {
+        "id": "inproc-session-state",
+        "key": "inprocSessionState",
+        "level": "warning",
+        "rule": "state or a cache kept in memory, which is not shared when the app scales out"
+      },
+      {
+        "id": "non-standard-port",
+        "key": "nonStandardPort",
+        "level": "warning",
+        "rule": "a port other than 80 and 443 bound in the code or in appsettings.json"
+      },
+      {
+        "id": "raw-socket",
+        "key": "rawSocket",
+        "level": "warning",
+        "rule": "a listener that takes connections outside the web server"
+      },
+      {
+        "id": "background-work",
+        "key": "backgroundWork",
+        "level": "info",
+        "rule": "a Windows service, a scheduled task or long background work in the app"
+      },
+      {
+        "id": "custom-module-handler",
+        "key": "customModuleHandler",
+        "level": "info",
+        "rule": "a custom HTTP module or handler in web.config"
+      },
+      {
+        "id": "isapi-extension",
+        "key": "isapiExtension",
+        "level": "info",
+        "rule": "an ISAPI filter or extension in web.config"
+      },
+      {
+        "id": "url-rewrite",
+        "key": "urlRewrite",
+        "level": "info",
+        "rule": "a URL Rewrite rule in web.config"
+      },
+      {
+        "id": "state-server-session",
+        "key": "stateServerSession",
+        "level": "info",
+        "rule": "state kept outside the process by the ASP.NET state service or SQL Server"
+      },
+      {
+        "id": "local-path-setting",
+        "key": "localPathSetting",
+        "level": "warning",
+        "rule": "a local path in web.config or appsettings.json"
+      },
+      {
+        "id": "unreadable-file",
+        "key": null,
+        "level": "error",
+        "rule": "a file of a kind the tool reads, or a folder, that the tool could not read as text"
+      },
+      {
+        "id": "scan-limit",
+        "key": null,
+        "level": "error",
+        "rule": "a folder whose files go past a limit of the run"
+      }
+    ]
+  },
+  "apps": [
+    {
+      "name": "Pellworth.Rates.Api",
+      "folder": "examples/messy/Pellworth.Rates.Api",
+      "projects": [
+        "examples/messy/Pellworth.Rates.Api/Pellworth.Rates.Api.csproj"
+      ],
+      "frameworks": [
+        {
+          "value": "net7.0",
+          "tfm": "net7.0",
+          "shown": "net7.0",
+          "at": "examples/messy/Pellworth.Rates.Api/Pellworth.Rates.Api.csproj:3"
+        }
+      ],
+      "findings": 5,
+      "byLevel": {
+        "error": 0,
+        "warning": 3,
+        "info": 2
+      },
+      "verdict": "Ready with changes"
+    },
+    {
+      "name": "Pellworth.Tracking",
+      "folder": "examples/messy/Pellworth.Tracking",
+      "projects": [
+        "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj"
+      ],
+      "frameworks": [
+        {
+          "value": "v4.0",
+          "tfm": "net40",
+          "shown": "v4.0 (net40)",
+          "at": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:8"
+        }
+      ],
+      "findings": 29,
+      "byLevel": {
+        "error": 7,
+        "warning": 17,
+        "info": 5
+      },
+      "verdict": "Blockers"
+    }
+  ],
+  "rules": [
+    {
+      "id": "hard-coded-secret",
+      "level": "error",
+      "findings": 2
+    },
+    {
+      "id": "registry-access",
+      "level": "error",
+      "findings": 1
+    },
+    {
+      "id": "com-interop",
+      "level": "error",
+      "findings": 3
+    },
+    {
+      "id": "unsupported-framework",
+      "level": "error",
+      "findings": 1
+    },
+    {
+      "id": "local-disk-write",
+      "level": "warning",
+      "findings": 3
+    },
+    {
+      "id": "gac-assembly",
+      "level": "warning",
+      "findings": 1
+    },
+    {
+      "id": "windows-authentication",
+      "level": "warning",
+      "findings": 2
+    },
+    {
+      "id": "smtp-pickup-directory",
+      "level": "warning",
+      "findings": 1
+    },
+    {
+      "id": "msmq",
+      "level": "warning",
+      "findings": 4
+    },
+    {
+      "id": "event-log",
+      "level": "warning",
+      "findings": 3
+    },
+    {
+      "id": "inproc-session-state",
+      "level": "warning",
+      "findings": 2
+    },
+    {
+      "id": "non-standard-port",
+      "level": "warning",
+      "findings": 2
+    },
+    {
+      "id": "raw-socket",
+      "level": "warning",
+      "findings": 0
+    },
+    {
+      "id": "background-work",
+      "level": "info",
+      "findings": 3
+    },
+    {
+      "id": "custom-module-handler",
+      "level": "info",
+      "findings": 2
+    },
+    {
+      "id": "isapi-extension",
+      "level": "info",
+      "findings": 1
+    },
+    {
+      "id": "url-rewrite",
+      "level": "info",
+      "findings": 1
+    },
+    {
+      "id": "state-server-session",
+      "level": "info",
+      "findings": 0
+    },
+    {
+      "id": "local-path-setting",
+      "level": "warning",
+      "findings": 2
+    },
+    {
+      "id": "unreadable-file",
+      "level": "error",
+      "findings": 0
+    },
+    {
+      "id": "scan-limit",
+      "level": "error",
+      "findings": 0
+    }
+  ],
+  "findings": [
+    {
+      "rule": "unsupported-framework",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj",
+      "line": 8,
+      "column": 29,
+      "at": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:8",
+      "found": "the app targets v4.0 (net40), .NET Framework, which is not on the list of frameworks the tool takes as offered by App Service (net20, net30, net35, net462 and 9 more)",
+      "fix": "retarget the app to a framework App Service offers, run it in a custom container, or, once you have checked that App Service runs it, add it to allowedFrameworks",
+      "basis": [
+        {
+          "text": "Windows instances have the supported .NET Framework versions installed, CLR 4 for .NET Framework 4 and CLR 2 for 3.5, and an app whose runtime is not supported can run in a custom container",
+          "source": "Configure ASP.NET apps for Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/configure-language-dotnet-framework"
+        },
+        {
+          "text": "an ASP.NET Core app sets its version in the project file, and outdated runtimes are hidden from the portal and may later be removed from the platform after notice",
+          "source": "Configure ASP.NET Core apps for Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/configure-language-dotnetcore"
+        }
+      ],
+      "own": "the frameworks offered are the tool's own list in src/defaults.js plus allowedFrameworks of the configuration; a project file is read first, web.config only when the projects of the app name no framework; a .NET Standard library is not compared; a form the tool does not read is reported"
+    },
+    {
+      "rule": "com-interop",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj",
+      "line": 19,
+      "column": 28,
+      "at": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:19",
+      "found": "the project references the COM component \"PellworthLabelPrint\"",
+      "fix": "replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container",
+      "basis": [
+        {
+          "text": "web frameworks can call in-process COM components that Windows registers by default, but not out-of-process COM components",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "DllImport, LibraryImport, ComImport, CreateObject, a type from a ProgID or CLSID, a Marshal call on a COM object, a VB Declare and a COMReference of a project file are reported; the tool cannot tell whether the component is one that Windows registers by default"
+    },
+    {
+      "rule": "com-interop",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs",
+      "line": 9,
+      "column": 10,
+      "at": "examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs:9",
+      "found": "the code calls COM or native code through \"DllImport\"",
+      "fix": "replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container",
+      "basis": [
+        {
+          "text": "web frameworks can call in-process COM components that Windows registers by default, but not out-of-process COM components",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "DllImport, LibraryImport, ComImport, CreateObject, a type from a ProgID or CLSID, a Marshal call on a COM object, a VB Declare and a COMReference of a project file are reported; the tool cannot tell whether the component is one that Windows registers by default"
+    },
+    {
+      "rule": "registry-access",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs",
+      "line": 14,
+      "column": 30,
+      "at": "examples/messy/Pellworth.Tracking/Services/CarrierSettings.cs:14",
+      "found": "the code uses the Windows registry through \"Registry.LocalMachine\"",
+      "fix": "move the values into app settings or Azure App Configuration; if the app must keep the registry, consider Managed Instance on App Service or a Windows container",
+      "basis": [
+        {
+          "text": "an app can read much of the registry but not HKEY_CURRENT_USER, and every write to the registry is blocked",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "any use of the registry types or calls is reported, reads too, because the tool cannot tell which keys App Service lets an app read; a using directive alone is not reported"
+    },
+    {
+      "rule": "com-interop",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb",
+      "line": 9,
+      "column": 27,
+      "at": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:9",
+      "found": "the code calls COM or native code through \"CreateObject(\"",
+      "fix": "replace the component with a managed library, or check that it is an in-process component Windows has by default; otherwise consider Managed Instance on App Service or a Windows container",
+      "basis": [
+        {
+          "text": "web frameworks can call in-process COM components that Windows registers by default, but not out-of-process COM components",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "DllImport, LibraryImport, ComImport, CreateObject, a type from a ProgID or CLSID, a Marshal call on a COM object, a VB Declare and a COMReference of a project file are reported; the tool cannot tell whether the component is one that Windows registers by default"
+    },
+    {
+      "rule": "hard-coded-secret",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 4,
+      "column": 125,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:4",
+      "found": "the connection string \"TrackingDb\" holds Password= with a secret written in the file; the value is masked",
+      "fix": "move the value into an App Service app setting or connection string, best as a Key Vault reference read with a managed identity, and change the secret, since it was in the repository",
+      "basis": [
+        {
+          "text": "an app setting or connection string can be a Key Vault reference that the app reads with its managed identity, so the secret stays out of the configuration",
+          "source": "Use Key Vault references as app settings in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references"
+        },
+        {
+          "text": "an app setting or connection string set in App Service takes the place of the one with the same name in web.config, so secrets can stay out of the repository",
+          "source": "Configure ASP.NET apps for Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/configure-language-dotnet-framework"
+        }
+      ],
+      "own": "a secret is a part Password=, Pwd=, AccountKey= or SharedAccessKey= of a connection string, or a setting or attribute whose name ends in one of those words; a value that is empty, true or false, a Key Vault reference or a placeholder such as $(Name), #{Name}# or __Name__ is not one; the value is never shown, in any format"
+    },
+    {
+      "rule": "hard-coded-secret",
+      "level": "error",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 9,
+      "column": 102,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:9",
+      "found": "the setting \"ProofOfDeliveryStorage\" holds AccountKey= with a secret written in the file; the value is masked",
+      "fix": "move the value into an App Service app setting or connection string, best as a Key Vault reference read with a managed identity, and change the secret, since it was in the repository",
+      "basis": [
+        {
+          "text": "an app setting or connection string can be a Key Vault reference that the app reads with its managed identity, so the secret stays out of the configuration",
+          "source": "Use Key Vault references as app settings in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references"
+        },
+        {
+          "text": "an app setting or connection string set in App Service takes the place of the one with the same name in web.config, so secrets can stay out of the repository",
+          "source": "Configure ASP.NET apps for Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/configure-language-dotnet-framework"
+        }
+      ],
+      "own": "a secret is a part Password=, Pwd=, AccountKey= or SharedAccessKey= of a connection string, or a setting or attribute whose name ends in one of those words; a value that is empty, true or false, a Key Vault reference or a placeholder such as $(Name), #{Name}# or __Name__ is not one; the value is never shown, in any format"
+    },
+    {
+      "rule": "non-standard-port",
+      "level": "warning",
+      "app": "Pellworth.Rates.Api",
+      "file": "examples/messy/Pellworth.Rates.Api/Program.cs",
+      "line": 5,
+      "column": 35,
+      "at": "examples/messy/Pellworth.Rates.Api/Program.cs:5",
+      "found": "the code binds the port 5080",
+      "fix": "let App Service give the port: on Windows the app runs behind IIS, and in a Linux container read the PORT setting; serve other traffic through HTTP on the usual ports",
+      "basis": [
+        {
+          "text": "an app makes outbound TCP and UDP connections and may listen only on one local loopback socket of its own",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a port in a URL, or as the port argument of Listen, ListenAnyIP, ListenLocalhost, IPEndPoint, TcpListener or UdpClient, on a line that binds, and the ports of Urls in appsettings.json; outbound URLs on other lines are not read"
+    },
+    {
+      "rule": "inproc-session-state",
+      "level": "warning",
+      "app": "Pellworth.Rates.Api",
+      "file": "examples/messy/Pellworth.Rates.Api/Program.cs",
+      "line": 6,
+      "column": 18,
+      "at": "examples/messy/Pellworth.Rates.Api/Program.cs:6",
+      "found": "the code keeps its cache and state in the memory of one instance through \"AddDistributedMemoryCache(\"",
+      "fix": "keep the state in Azure Cache for Redis or SQL, with the ASP.NET Redis state provider or a Redis distributed cache, before scaling out",
+      "basis": [
+        {
+          "text": "InProc keeps state in the memory of one web server and is the default; StateServer and SQLServer keep it outside the worker process for a web farm, with the ASP.NET state service or a SQL database",
+          "source": "Session-State Modes (ASP.NET, Microsoft Learn archive)",
+          "url": "https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178586(v=vs.100)"
+        },
+        {
+          "text": "App Service uses ARR affinity to keep a user on one instance, but that hurts scaling and updates; a Redis or SQL Server distributed cache needs no affinity",
+          "source": "Session in ASP.NET Core (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state"
+        },
+        {
+          "text": "in the cloud or a server farm a distributed cache such as Redis or SQL Server is shared by all servers, while a cache in memory suits one server or requests kept on one server",
+          "source": "Overview of caching in ASP.NET Core (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/overview"
+        }
+      ],
+      "own": "<sessionState mode=\"InProc\"> or <sessionState> with no mode in web.config, and AddDistributedMemoryCache in the code; App Service keeps a user on one instance by default, so it works on one instance and loses state on a restart, a swap or a scale in"
+    },
+    {
+      "rule": "non-standard-port",
+      "level": "warning",
+      "app": "Pellworth.Rates.Api",
+      "file": "examples/messy/Pellworth.Rates.Api/appsettings.json",
+      "line": 6,
+      "column": 27,
+      "at": "examples/messy/Pellworth.Rates.Api/appsettings.json:6",
+      "found": "the setting \"Urls\" binds the ports 5080 and 5443",
+      "fix": "let App Service give the port: on Windows the app runs behind IIS, and in a Linux container read the PORT setting; serve other traffic through HTTP on the usual ports",
+      "basis": [
+        {
+          "text": "an app makes outbound TCP and UDP connections and may listen only on one local loopback socket of its own",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a port in a URL, or as the port argument of Listen, ListenAnyIP, ListenLocalhost, IPEndPoint, TcpListener or UdpClient, on a line that binds, and the ports of Urls in appsettings.json; outbound URLs on other lines are not read"
+    },
+    {
+      "rule": "event-log",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Global.asax.cs",
+      "line": 12,
+      "column": 18,
+      "at": "examples/messy/Pellworth.Tracking/Global.asax.cs:12",
+      "found": "the code uses the Windows event log through \"EventLog.SourceExists\"",
+      "fix": "log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights",
+      "basis": [
+        {
+          "text": "calls that read or write the Windows event logs or ETW may seem to work, but the app has no access to that data; logs go to the app folder or to blob storage",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "EventLog calls, a new EventLog, an EventLogTraceListener and AddEventLog of ASP.NET Core logging"
+    },
+    {
+      "rule": "event-log",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Global.asax.cs",
+      "line": 14,
+      "column": 17,
+      "at": "examples/messy/Pellworth.Tracking/Global.asax.cs:14",
+      "found": "the code uses the Windows event log through \"EventLog.CreateEventSource\"",
+      "fix": "log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights",
+      "basis": [
+        {
+          "text": "calls that read or write the Windows event logs or ETW may seem to work, but the app has no access to that data; logs go to the app folder or to blob storage",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "EventLog calls, a new EventLog, an EventLogTraceListener and AddEventLog of ASP.NET Core logging"
+    },
+    {
+      "rule": "event-log",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Global.asax.cs",
+      "line": 21,
+      "column": 13,
+      "at": "examples/messy/Pellworth.Tracking/Global.asax.cs:21",
+      "found": "the code uses the Windows event log through \"EventLog.WriteEntry\"",
+      "fix": "log through ILogger or System.Diagnostics.Trace to App Service diagnostic logs or Application Insights",
+      "basis": [
+        {
+          "text": "calls that read or write the Windows event logs or ETW may seem to work, but the app has no access to that data; logs go to the app folder or to blob storage",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "EventLog calls, a new EventLog, an EventLogTraceListener and AddEventLog of ASP.NET Core logging"
+    },
+    {
+      "rule": "msmq",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj",
+      "line": 13,
+      "column": 25,
+      "at": "examples/messy/Pellworth.Tracking/Pellworth.Tracking.csproj:13",
+      "found": "the project references System.Messaging, the MSMQ library",
+      "fix": "move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service",
+      "basis": [
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "System.Messaging, MessageQueue, FormatName: addresses, net.msmq bindings and addresses, and a reference to System.Messaging"
+    },
+    {
+      "rule": "msmq",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb",
+      "line": 1,
+      "column": 9,
+      "at": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:1",
+      "found": "the code uses MSMQ through \"System.Messaging\"",
+      "fix": "move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service",
+      "basis": [
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "System.Messaging, MessageQueue, FormatName: addresses, net.msmq bindings and addresses, and a reference to System.Messaging"
+    },
+    {
+      "rule": "msmq",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb",
+      "line": 6,
+      "column": 46,
+      "at": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:6",
+      "found": "the code uses MSMQ through \"FormatName:\"",
+      "fix": "move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service",
+      "basis": [
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "System.Messaging, MessageQueue, FormatName: addresses, net.msmq bindings and addresses, and a reference to System.Messaging"
+    },
+    {
+      "rule": "msmq",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb",
+      "line": 12,
+      "column": 28,
+      "at": "examples/messy/Pellworth.Tracking/Services/LabelPrinter.vb:12",
+      "found": "the code uses MSMQ through \"New MessageQueue\"",
+      "fix": "move the queues to Azure Service Bus or Azure Storage queues; an app that must keep an MSMQ client can look at Managed Instance on App Service",
+      "basis": [
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "System.Messaging, MessageQueue, FormatName: addresses, net.msmq bindings and addresses, and a reference to System.Messaging"
+    },
+    {
+      "rule": "local-disk-write",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs",
+      "line": 14,
+      "column": 13,
+      "at": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:14",
+      "found": "the code writes a file through \"File.WriteAllText(\" to the local path \"C:\\Pellworth\\Exports\\\" (named 2 lines above)",
+      "fix": "keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files",
+      "basis": [
+        {
+          "text": "the local storage of an instance is temporary: it does not survive a restart and is not shared with the other instances of the app",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "the HOME folder is a content share in Azure Storage that survives restarts and is shared by every instance, and paths should come from environment variables, not a hard-coded drive",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a call that writes, moves or deletes a file, on a line that holds an absolute path (a drive, a share or /var, /opt, /srv, /mnt, /home or /data) or a path in the folder of the app such as Server.MapPath, or with such a path in the three lines above; a temporary path is fine; a path held in a variable set further away is not seen"
+    },
+    {
+      "rule": "local-disk-write",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs",
+      "line": 17,
+      "column": 13,
+      "at": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:17",
+      "found": "the code writes a file through \"File.Copy(\" to the local path \"\\\\fs01\\manifests\\archive\\\"",
+      "fix": "keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files",
+      "basis": [
+        {
+          "text": "the local storage of an instance is temporary: it does not survive a restart and is not shared with the other instances of the app",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "the HOME folder is a content share in Azure Storage that survives restarts and is shared by every instance, and paths should come from environment variables, not a hard-coded drive",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a call that writes, moves or deletes a file, on a line that holds an absolute path (a drive, a share or /var, /opt, /srv, /mnt, /home or /data) or a path in the folder of the app such as Server.MapPath, or with such a path in the three lines above; a temporary path is fine; a path held in a variable set further away is not seen"
+    },
+    {
+      "rule": "local-disk-write",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs",
+      "line": 22,
+      "column": 19,
+      "at": "examples/messy/Pellworth.Tracking/Services/ManifestExporter.cs:22",
+      "found": "the code writes a file through \".SaveAs(\" to a path in the folder of the app (\"Server.MapPath\")",
+      "fix": "keep files that must last or be shared in Azure Blob Storage or Azure Files; use the HOME folder only for small shared files and the temporary folder only for scratch files",
+      "basis": [
+        {
+          "text": "the local storage of an instance is temporary: it does not survive a restart and is not shared with the other instances of the app",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        },
+        {
+          "text": "the HOME folder is a content share in Azure Storage that survives restarts and is shared by every instance, and paths should come from environment variables, not a hard-coded drive",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a call that writes, moves or deletes a file, on a line that holds an absolute path (a drive, a share or /var, /opt, /srv, /mnt, /home or /data) or a path in the folder of the app such as Server.MapPath, or with such a path in the three lines above; a temporary path is fine; a path held in a variable set further away is not seen"
+    },
+    {
+      "rule": "local-path-setting",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 8,
+      "column": 44,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:8",
+      "found": "web.config sets the setting \"ManifestExportFolder\" to \"D:\\Pellworth\\Manifests\", a local path",
+      "fix": "set the path in an App Service app setting, built from the HOME or temporary folder, or move the files to Azure Storage",
+      "basis": [
+        {
+          "text": "the HOME folder is a content share in Azure Storage that survives restarts and is shared by every instance, and paths should come from environment variables, not a hard-coded drive",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a web.config attribute or an appsettings.json value that starts with a drive, a share or /var, /opt, /srv, /mnt, /home or /data; the tool cannot tell whether the app writes there"
+    },
+    {
+      "rule": "gac-assembly",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 17,
+      "column": 24,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:17",
+      "found": "web.config compiles against the assembly \"Pellworth.Legacy.Barcode\", which no package or reference with a HintPath of the app provides, so it may come from the Global Assembly Cache",
+      "fix": "add the assembly as a NuGet package or a file deployed with the app, or, if it can only come from the Global Assembly Cache, consider a Windows container or Managed Instance on App Service",
+      "basis": [
+        {
+          "text": "some .NET Framework apps depend on components in the Global Assembly Cache that App Service does not have; Windows containers and Managed Instance are the ways to run them",
+          "source": "Migrate .NET apps to Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/app-service-asp-net-migration"
+        }
+      ],
+      "own": "an assembly of <compilation><assemblies> whose name is not a framework assembly (a name starting with System. or one of the list in src/defaults.js), not in knownAssemblies of the configuration, and not the id of a package or a reference with a HintPath of the same app; names are compared without regard to case"
+    },
+    {
+      "rule": "windows-authentication",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 21,
+      "column": 27,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:21",
+      "found": "web.config sets <authentication mode=\"Windows\">, which signs users in with their Windows account",
+      "fix": "sign users in with Microsoft Entra ID, through App Service authentication or the Microsoft identity libraries, and stop relying on the Windows account of the request",
+      "basis": [
+        {
+          "text": "App Service authentication signs users in with Microsoft Entra and other providers through a platform module that runs before the app code, with no code changes",
+          "source": "Authentication and authorization in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization"
+        }
+      ],
+      "own": "<authentication mode=\"Windows\">, <windowsAuthentication enabled=\"true\">, <identity impersonate=\"true\"> in web.config, and Negotiate or impersonation calls in the code"
+    },
+    {
+      "rule": "windows-authentication",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 22,
+      "column": 28,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:22",
+      "found": "web.config sets <identity impersonate=\"true\">, which runs requests as the Windows user",
+      "fix": "sign users in with Microsoft Entra ID, through App Service authentication or the Microsoft identity libraries, and stop relying on the Windows account of the request",
+      "basis": [
+        {
+          "text": "App Service authentication signs users in with Microsoft Entra and other providers through a platform module that runs before the app code, with no code changes",
+          "source": "Authentication and authorization in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization"
+        }
+      ],
+      "own": "<authentication mode=\"Windows\">, <windowsAuthentication enabled=\"true\">, <identity impersonate=\"true\"> in web.config, and Negotiate or impersonation calls in the code"
+    },
+    {
+      "rule": "inproc-session-state",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 23,
+      "column": 25,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:23",
+      "found": "web.config sets <sessionState mode=\"InProc\">, which keeps state in the memory of one instance",
+      "fix": "keep the state in Azure Cache for Redis or SQL, with the ASP.NET Redis state provider or a Redis distributed cache, before scaling out",
+      "basis": [
+        {
+          "text": "InProc keeps state in the memory of one web server and is the default; StateServer and SQLServer keep it outside the worker process for a web farm, with the ASP.NET state service or a SQL database",
+          "source": "Session-State Modes (ASP.NET, Microsoft Learn archive)",
+          "url": "https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178586(v=vs.100)"
+        },
+        {
+          "text": "App Service uses ARR affinity to keep a user on one instance, but that hurts scaling and updates; a Redis or SQL Server distributed cache needs no affinity",
+          "source": "Session in ASP.NET Core (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state"
+        },
+        {
+          "text": "in the cloud or a server farm a distributed cache such as Redis or SQL Server is shared by all servers, while a cache in memory suits one server or requests kept on one server",
+          "source": "Overview of caching in ASP.NET Core (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/overview"
+        }
+      ],
+      "own": "<sessionState mode=\"InProc\"> or <sessionState> with no mode in web.config, and AddDistributedMemoryCache in the code; App Service keeps a user on one instance by default, so it works on one instance and loses state on a restart, a swap or a scale in"
+    },
+    {
+      "rule": "smtp-pickup-directory",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 30,
+      "column": 29,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:30",
+      "found": "web.config sends mail with deliveryMethod=\"SpecifiedPickupDirectory\", which drops each message into a folder",
+      "fix": "send mail through an SMTP relay or a mail service such as Azure Communication Services, with its credentials in app settings",
+      "basis": [
+        {
+          "text": "the local storage of an instance is temporary: it does not survive a restart and is not shared with the other instances of the app",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "deliveryMethod=\"SpecifiedPickupDirectory\" or \"PickupDirectoryFromIis\" in web.config, and the same delivery methods or PickupDirectoryLocation in the code; App Service runs no SMTP service to pick the files up"
+    },
+    {
+      "rule": "local-path-setting",
+      "level": "warning",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 31,
+      "column": 60,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:31",
+      "found": "web.config sets pickupDirectoryLocation of <specifiedPickupDirectory> to \"C:\\inetpub\\mailroot\\Pickup\", a local path",
+      "fix": "set the path in an App Service app setting, built from the HOME or temporary folder, or move the files to Azure Storage",
+      "basis": [
+        {
+          "text": "the HOME folder is a content share in Azure Storage that survives restarts and is shared by every instance, and paths should come from environment variables, not a hard-coded drive",
+          "source": "Operating system functionality in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/operating-system-functionality"
+        }
+      ],
+      "own": "a web.config attribute or an appsettings.json value that starts with a drive, a share or /var, /opt, /srv, /mnt, /home or /data; the tool cannot tell whether the app writes there"
+    },
+    {
+      "rule": "background-work",
+      "level": "info",
+      "app": "Pellworth.Rates.Api",
+      "file": "examples/messy/Pellworth.Rates.Api/Program.cs",
+      "line": 8,
+      "column": 18,
+      "at": "examples/messy/Pellworth.Rates.Api/Program.cs:8",
+      "found": "the code runs work in the background through \"AddHostedService\"",
+      "fix": "run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app",
+      "basis": [
+        {
+          "text": "WebJobs run a program or script beside the web app, continuously or on a schedule, and Azure Functions is another way to run such work",
+          "source": "Run background tasks with WebJobs in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/webjobs-create"
+        }
+      ],
+      "own": "ServiceBase, System.ServiceProcess, UseWindowsService, AddWindowsService, QueueBackgroundWorkItem, BackgroundService, AddHostedService, schtasks and the TaskScheduler library; work in the web process stops when the app is idle unless Always On is set"
+    },
+    {
+      "rule": "background-work",
+      "level": "info",
+      "app": "Pellworth.Rates.Api",
+      "file": "examples/messy/Pellworth.Rates.Api/RateRefresher.cs",
+      "line": 3,
+      "column": 35,
+      "at": "examples/messy/Pellworth.Rates.Api/RateRefresher.cs:3",
+      "found": "the code runs work in the background through \": BackgroundService\"",
+      "fix": "run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app",
+      "basis": [
+        {
+          "text": "WebJobs run a program or script beside the web app, continuously or on a schedule, and Azure Functions is another way to run such work",
+          "source": "Run background tasks with WebJobs in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/webjobs-create"
+        }
+      ],
+      "own": "ServiceBase, System.ServiceProcess, UseWindowsService, AddWindowsService, QueueBackgroundWorkItem, BackgroundService, AddHostedService, schtasks and the TaskScheduler library; work in the web process stops when the app is idle unless Always On is set"
+    },
+    {
+      "rule": "background-work",
+      "level": "info",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Global.asax.cs",
+      "line": 16,
+      "column": 32,
+      "at": "examples/messy/Pellworth.Tracking/Global.asax.cs:16",
+      "found": "the code runs work in the background through \"QueueBackgroundWorkItem(\"",
+      "fix": "run the work as a WebJob or in Azure Functions, and turn Always On on for work that must keep running in the web app",
+      "basis": [
+        {
+          "text": "WebJobs run a program or script beside the web app, continuously or on a schedule, and Azure Functions is another way to run such work",
+          "source": "Run background tasks with WebJobs in Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/webjobs-create"
+        }
+      ],
+      "own": "ServiceBase, System.ServiceProcess, UseWindowsService, AddWindowsService, QueueBackgroundWorkItem, BackgroundService, AddHostedService, schtasks and the TaskScheduler library; work in the web process stops when the app is idle unless Always On is set"
+    },
+    {
+      "rule": "custom-module-handler",
+      "level": "info",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 25,
+      "column": 35,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:25",
+      "found": "web.config adds the HTTP module \"YardAudit\" of type \"Pellworth.Tracking.Modules.YardAuditModule\"",
+      "fix": "check that each module and handler runs under App Service, with no registry, COM or local disk use of its own, and test it there",
+      "basis": [
+        {
+          "text": "a web app assessment rates each app Ready, Ready with conditions, Not ready or Unknown, and lists the issues and warnings with how to fix them",
+          "source": "Review web apps for migration (Azure Migrate, Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/migrate/review-web-app-assessment"
+        }
+      ],
+      "own": "an <add> under <modules>, <httpModules>, <handlers> or <httpHandlers> whose type does not start with System. or Microsoft.; most run on App Service, so this is a note to check them"
+    },
+    {
+      "rule": "custom-module-handler",
+      "level": "info",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 37,
+      "column": 35,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:37",
+      "found": "web.config adds the HTTP module \"YardAudit\" of type \"Pellworth.Tracking.Modules.YardAuditModule\"",
+      "fix": "check that each module and handler runs under App Service, with no registry, COM or local disk use of its own, and test it there",
+      "basis": [
+        {
+          "text": "a web app assessment rates each app Ready, Ready with conditions, Not ready or Unknown, and lists the issues and warnings with how to fix them",
+          "source": "Review web apps for migration (Azure Migrate, Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/migrate/review-web-app-assessment"
+        }
+      ],
+      "own": "an <add> under <modules>, <httpModules>, <handlers> or <httpHandlers> whose type does not start with System. or Microsoft.; most run on App Service, so this is a note to check them"
+    },
+    {
+      "rule": "isapi-extension",
+      "level": "info",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 40,
+      "column": 73,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:40",
+      "found": "web.config maps the handler \"ManifestImage\" to an ISAPI extension",
+      "fix": "check that the ISAPI component can be deployed with the app and runs in the App Service sandbox, or replace it with a managed module",
+      "basis": [
+        {
+          "text": "a web app assessment rates each app Ready, Ready with conditions, Not ready or Unknown, and lists the issues and warnings with how to fix them",
+          "source": "Review web apps for migration (Azure Migrate, Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/migrate/review-web-app-assessment"
+        },
+        {
+          "text": "Managed Instance on App Service is meant for Windows apps that need COM, registry access, installers, drive mapping or an MSMQ client",
+          "source": "Overview of Azure App Service (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/app-service/overview"
+        }
+      ],
+      "own": "a handler on IsapiModule or with a .dll scriptProcessor, an <isapiFilters> filter and an <isapiCgiRestriction> entry"
+    },
+    {
+      "rule": "url-rewrite",
+      "level": "info",
+      "app": "Pellworth.Tracking",
+      "file": "examples/messy/Pellworth.Tracking/Web.config",
+      "line": 45,
+      "column": 21,
+      "at": "examples/messy/Pellworth.Tracking/Web.config:45",
+      "found": "web.config has the URL Rewrite rule \"Old tracking links\"",
+      "fix": "check each rule on App Service, above all rules that use server variables, rewrite to another host through ARR, or depend on the old host name",
+      "basis": [
+        {
+          "text": "a web app assessment rates each app Ready, Ready with conditions, Not ready or Unknown, and lists the issues and warnings with how to fix them",
+          "source": "Review web apps for migration (Azure Migrate, Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/azure/migrate/review-web-app-assessment"
+        }
+      ],
+      "own": "one finding per <rule> under <rewrite>; App Service on Windows has the URL Rewrite module, so this is a note to check rules that read server variables or rewrite to other hosts"
+    }
+  ],
+  "totals": {
+    "findings": 34,
+    "byLevel": {
+      "error": 7,
+      "warning": 20,
+      "info": 7
+    },
+    "hidden": 0,
+    "notListed": 0,
+    "apps": 2,
+    "byVerdict": {
+      "Ready": 0,
+      "Ready with changes": 1,
+      "Blockers": 1
+    }
+  },
+  "result": {
+    "pass": false,
+    "failOn": "error",
+    "failing": 7,
+    "byLevel": {
+      "error": 7,
+      "warning": 20,
+      "info": 7
+    },
+    "text": "FAIL - 7 findings at or above error (7 error, 20 warning, 7 info)"
+  },
+  "notes": [],
+  "notice": "This check reads the source as text and runs none of it. A finding is a lead found by a pattern, and a clean result is not a migration assessment and not a certification (docs/limits.md)."
+}
